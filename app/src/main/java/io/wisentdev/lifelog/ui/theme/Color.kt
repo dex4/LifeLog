@@ -36,38 +36,6 @@ val outlineDark = Color(0xFF616161)  // Muted dark gray
 val outlineVariantDark = Color(0xFF757575)  // Slightly lighter dark gray
 val scrimDark = Color(0x80000000)  // Semi-transparent black
 
-//val primaryLight = Color(0xFF006A6A)
-//val onPrimaryLight = Color(0xFFFFFFFF)
-//val secondaryLight = Color(0xFF5D5F5F)
-//val onSecondaryLight = Color(0xFFFFFFFF)
-//val tertiaryLight = Color(0xFF006E09)
-//val onTertiaryLight = Color(0xFFFFFFFF)
-//val errorLight = Color(0xFFBA1A1A)
-//val onErrorLight = Color(0xFFFFFFFF)
-//val backgroundLight = Color(0xFFF4FBFA)
-//val onBackgroundLight = Color(0xFF161D1D)
-//val surfaceLight = Color(0xFFFCF8F8)
-//val onSurfaceLight = Color(0xFF1C1B1B)
-//val outlineLight = Color(0xFF747878)
-//val outlineVariantLight = Color(0xFFC4C7C8)
-//val scrimLight = Color(0xFF000000)
-//
-//val primaryDark = Color(0xFF4ADCDD)
-//val onPrimaryDark = Color(0xFF003737)
-//val secondaryDark = Color(0xFFFFFFFF)
-//val onSecondaryDark = Color(0xFF2F3131)
-//val tertiaryDark = Color(0xFF81EC71)
-//val onTertiaryDark = Color(0xFF003A02)
-//val errorDark = Color(0xFFFFB4AB)
-//val onErrorDark = Color(0xFF690005)
-//val backgroundDark = Color(0xFF0E1514)
-//val onBackgroundDark = Color(0xFFDDE4E3)
-//val surfaceDark = Color(0xFF141313)
-//val onSurfaceDark = Color(0xFFE5E2E1)
-//val outlineDark = Color(0xFF8E9192)
-//val outlineVariantDark = Color(0xFF444748)
-//val scrimDark = Color(0xFF000000)
-
 // Cyan
 val cyanLight = Color(0xFF80DEEA)       // Soft Cyan (Light)
 val onCyanLight = Color(0xFF004D56)     // Deep Teal for contrast

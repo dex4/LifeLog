@@ -19,6 +19,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import io.wisentdev.lifelog.feature.moneylog.dashboard.model.MoneyLogDashboardItem
 import io.wisentdev.lifelog.ui.theme.LifeLogTheme
 
 @Composable
@@ -52,9 +53,9 @@ fun OverallBreakdown(
             )
             Text(
                 modifier = Modifier.fillMaxWidth(),
-                text = overallBreakdown.expensesTotal.toString(),
+                text = "€${overallBreakdown.expensesTotal}",
                 textAlign = TextAlign.End,
-                color = LifeLogTheme.colorScheme.onSurface,
+                color = LifeLogTheme.extendedColors.red.color,
                 style = LifeLogTheme.typography.headlineSmall,
                 fontWeight = FontWeight.Bold
             )
@@ -79,9 +80,9 @@ fun OverallBreakdown(
             )
             Text(
                 modifier = Modifier.fillMaxWidth(),
-                text = overallBreakdown.incomeTotal.toString(),
+                text = "€${overallBreakdown.incomeTotal}",
                 textAlign = TextAlign.End,
-                color = LifeLogTheme.colorScheme.onSurface,
+                color = LifeLogTheme.extendedColors.green.color,
                 style = LifeLogTheme.typography.headlineSmall,
                 fontWeight = FontWeight.Bold
             )

@@ -18,6 +18,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import io.wisentdev.lifelog.feature.moneylog.dashboard.model.MoneyLogDashboardItem
 import io.wisentdev.lifelog.ui.theme.LifeLogTheme
 
 @Composable
@@ -62,7 +63,7 @@ fun BalanceHeader(
         Text(
             modifier = Modifier
                 .align(Alignment.TopCenter)
-                .padding(top = 96.dp),
+                .padding(top = 80.dp),
             text = "Balance\n${balanceHeaderDetails.balance}",
             style = LifeLogTheme.typography.headlineSmall,
             color = LifeLogTheme.colorScheme.onBackground,

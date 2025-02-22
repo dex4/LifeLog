@@ -1,4 +1,4 @@
-package io.wisentdev.lifelog.feature.moneylog.dashboard.ui
+package io.wisentdev.lifelog.feature.moneylog.dashboard.model
 
 import androidx.annotation.FloatRange
 
@@ -7,18 +7,18 @@ sealed class MoneyLogDashboardItem(open val id: String) {
     data class BalanceHeaderDetails(
         val balance: Float,
         @FloatRange(0.0, 1.0)
-        val expensesPercentage: Float
+        val expensesPercentage: Float,
     ) : MoneyLogDashboardItem(id = KEY_BALANCE_HEADER)
 
     data class OverallBreakdown(
         val expensesTotal: Float,
-        val incomeTotal: Float
+        val incomeTotal: Float,
     ) : MoneyLogDashboardItem(id = KEY_OVERALL_BREAKDOWN)
 
     data class TopCategoriesBreakdown(
         override val id: String,
-        val categories: List<String>,
-        val isExpensesBreakdown: Boolean
+        val categories: List<MoneyLogCategoryDetails>,
+        val isExpensesBreakdown: Boolean,
     ) : MoneyLogDashboardItem(id = id)
 }
 

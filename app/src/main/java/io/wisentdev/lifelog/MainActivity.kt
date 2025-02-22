@@ -30,6 +30,7 @@ class MainActivity : ComponentActivity() {
                             .padding(bottom = 16.dp)
                             .padding(innerPadding),
                         uiState = MoneyLogDashboardUiState.Success(),
+                        onViewCategoriesDetailsClicked = {},
                         onAddExpense = {},
                         onAddIncome = {}
                     )

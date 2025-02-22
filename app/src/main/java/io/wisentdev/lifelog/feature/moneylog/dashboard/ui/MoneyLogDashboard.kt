@@ -15,6 +15,7 @@ import io.wisentdev.lifelog.ui.theme.LifeLogTheme
 fun MoneyLogDashboard(
     modifier: Modifier = Modifier,
     uiState: MoneyLogDashboardUiState,
+    onViewCategoriesDetailsClicked: (isExpenseCategories: Boolean) -> Unit,
     onAddIncome: () -> Unit,
     onAddExpense: () -> Unit,
 ) {
@@ -22,13 +23,13 @@ fun MoneyLogDashboard(
         is MoneyLogDashboardUiState.Success -> MoneyLogDashboardSuccess(
             modifier = modifier,
             uiState = uiState,
+            onViewCategoriesDetailsClicked = onViewCategoriesDetailsClicked,
             onAddIncome = onAddIncome,
-            onAddExpense = onAddExpense
+            onAddExpense = onAddExpense,
         )
 
-
-        is MoneyLogDashboardUiState.Error -> TODO()
-        MoneyLogDashboardUiState.Loading -> TODO()
+        is MoneyLogDashboardUiState.Error -> Unit
+        MoneyLogDashboardUiState.Loading -> Unit
     }
 
 }
@@ -43,6 +44,7 @@ private fun MoneyLogDashboard_Preview() {
                 .background(color = LifeLogTheme.colorScheme.background)
                 .padding(bottom = 16.dp),
             uiState = MoneyLogDashboardUiState.Success(),
+            onViewCategoriesDetailsClicked = {},
             onAddExpense = {},
             onAddIncome = {}
         )

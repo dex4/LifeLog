@@ -15,6 +15,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import io.wisentdev.lifelog.feature.moneylog.dashboard.model.MoneyLogDashboardItem
 import io.wisentdev.lifelog.feature.moneylog.dashboard.model.MoneyLogDashboardUiState
 import io.wisentdev.lifelog.ui.theme.LifeLogTheme
 
@@ -22,6 +23,7 @@ import io.wisentdev.lifelog.ui.theme.LifeLogTheme
 fun MoneyLogDashboardSuccess(
     modifier: Modifier = Modifier,
     uiState: MoneyLogDashboardUiState.Success,
+    onViewCategoriesDetailsClicked: (isExpenseCategories: Boolean) -> Unit,
     onAddIncome: () -> Unit,
     onAddExpense: () -> Unit,
 ) {
@@ -31,9 +33,9 @@ fun MoneyLogDashboardSuccess(
             contentPadding = PaddingValues(
                 start = LifeLogTheme.dimensions.xLarge,
                 end = LifeLogTheme.dimensions.xLarge,
-                bottom = 72.dp
+                bottom = 96.dp
             ),
-            verticalArrangement = Arrangement.spacedBy(16.dp)
+            verticalArrangement = Arrangement.spacedBy(LifeLogTheme.dimensions.xLarge)
         ) {
             items(uiState.items) { item: MoneyLogDashboardItem ->
                 when (item) {
@@ -50,7 +52,10 @@ fun MoneyLogDashboardSuccess(
 
                     is MoneyLogDashboardItem.TopCategoriesBreakdown -> TopCategoriesBreakdown(
                         modifier = Modifier.fillMaxWidth(),
-                        topCategoriesBreakdown = item
+                        topCategoriesBreakdown = item,
+                        onViewCategoriesDetailsClicked = {
+                            onViewCategoriesDetailsClicked(item.isExpensesBreakdown)
+                        }
                     )
                 }
             }
@@ -77,7 +82,8 @@ private fun MoneyLogDashboardSuccess_Preview() {
                 .padding(vertical = LifeLogTheme.dimensions.medium),
             uiState = MoneyLogDashboardUiState.Success(),
             onAddExpense = {},
-            onAddIncome = {}
+            onAddIncome = {},
+            onViewCategoriesDetailsClicked = {},
         )
     }
 }
