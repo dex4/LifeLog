@@ -48,17 +48,19 @@ fun BalanceHeader(
                 )
             )
 
-            drawArc(
-                color = fillColor,
-                startAngle = -BALANCE_HEADER_SWEEP_ANGLE,
-                sweepAngle = balanceHeaderDetails.expensesPercentage * BALANCE_HEADER_SWEEP_ANGLE,
-                useCenter = false,
-                size = Size(size.width, size.width),
-                style = Stroke(
-                    width = 16.dp.toPx(),
-                    cap = StrokeCap.Round
+            if (balanceHeaderDetails.expensesPercentage > 0) {
+                drawArc(
+                    color = fillColor,
+                    startAngle = BALANCE_HEADER_START_ANGLE,
+                    sweepAngle = balanceHeaderDetails.expensesPercentage * BALANCE_HEADER_SWEEP_ANGLE,
+                    useCenter = false,
+                    size = Size(size.width, size.width),
+                    style = Stroke(
+                        width = 16.dp.toPx(),
+                        cap = StrokeCap.Round
+                    )
                 )
-            )
+            }
         }
         Text(
             modifier = Modifier
@@ -72,8 +74,9 @@ fun BalanceHeader(
         )
     }
 }
-private const val BALANCE_HEADER_START_ANGLE = -180f
-private const val BALANCE_HEADER_SWEEP_ANGLE = 190f
+
+private const val BALANCE_HEADER_START_ANGLE = -190f
+private const val BALANCE_HEADER_SWEEP_ANGLE = 200f
 
 @Preview(uiMode = Configuration.UI_MODE_NIGHT_YES)
 @Composable

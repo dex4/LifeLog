@@ -47,7 +47,7 @@ fun OverallBreakdown(
                 textAlign = TextAlign.Start,
                 color = LifeLogTheme.colorScheme.onSurface,
                 style = LifeLogTheme.typography.bodyLarge,
-                fontWeight = FontWeight.Bold
+                fontWeight = FontWeight.Bold,
             )
             Text(
                 modifier = Modifier.fillMaxWidth(),
@@ -55,12 +55,13 @@ fun OverallBreakdown(
                 textAlign = TextAlign.End,
                 color = LifeLogTheme.extendedColors.red.color,
                 style = LifeLogTheme.typography.headlineSmall,
-                fontWeight = FontWeight.Bold
+                fontWeight = FontWeight.Bold,
             )
         }
         VerticalDivider(
             modifier = Modifier.fillMaxHeight(),
             thickness = 1.dp,
+            color = LifeLogTheme.colorScheme.outline,
         )
         Column(
             modifier = Modifier

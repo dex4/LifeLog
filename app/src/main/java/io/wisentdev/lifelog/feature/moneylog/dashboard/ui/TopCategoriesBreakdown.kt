@@ -20,6 +20,8 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.geometry.Size
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.StrokeCap
+import androidx.compose.ui.graphics.drawscope.Stroke
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextOverflow
@@ -76,22 +78,29 @@ fun TopCategoriesBreakdown(
                 modifier = Modifier
                     .weight(1f)
                     .aspectRatio(1f)
+                    .align(Alignment.CenterVertically)
             ) {
                 var anglesSum = 0f
-                topCategoriesBreakdown.categories.fastForEach {
-                    val sweepAngle = anglesSum + BREAKDOWN_ARC_FULL_SWEEP_ANGLE * it.valuePercentage
+                topCategoriesBreakdown.categories.fastForEach { moneyLogCategoryDetails ->
+                    val sweepAngle = anglesSum + BREAKDOWN_ARC_FULL_SWEEP_ANGLE * moneyLogCategoryDetails.valuePercentage
                     drawArc(
-                        color = Color(it.iconTint),
+                        color = Color(moneyLogCategoryDetails.iconTint),
                         startAngle = -BREAKDOWN_ARC_START_ANGLE + anglesSum,
-                        sweepAngle = BREAKDOWN_ARC_FULL_SWEEP_ANGLE * it.valuePercentage,
+                        sweepAngle = BREAKDOWN_ARC_FULL_SWEEP_ANGLE * moneyLogCategoryDetails.valuePercentage - BREAKDOWN_ARC_OFFSET_ANGLE,
                         size = Size(size.width, size.width),
-                        useCenter = true,
+                        useCenter = false,
+                        style = Stroke(
+                            width = 10.dp.toPx(),
+                            cap = StrokeCap.Round,
+                        )
                     )
                     anglesSum += sweepAngle - anglesSum
                 }
             }
             TopCategoriesList(
-                modifier = Modifier.weight(2f),
+                modifier = Modifier
+                    .weight(2f)
+                    .padding(start = LifeLogTheme.dimensions.medium),
                 categories = topCategoriesBreakdown.categories
             )
         }
@@ -117,7 +126,6 @@ private fun TopCategoriesList(
             Row(
                 modifier = Modifier
                     .fillMaxWidth()
-                    .padding(start = LifeLogTheme.dimensions.small)
                     .padding(vertical = 2.dp),
                 verticalAlignment = Alignment.CenterVertically
             ) {
@@ -183,8 +191,9 @@ private fun ViewDetailsButton(
 }
 
 private const val MAX_DISPLAYED_TOP_CATEGORIES = 5
-private const val BREAKDOWN_ARC_START_ANGLE = -180
-private const val BREAKDOWN_ARC_FULL_SWEEP_ANGLE = 360
+private const val BREAKDOWN_ARC_START_ANGLE = -180f
+private const val BREAKDOWN_ARC_FULL_SWEEP_ANGLE = 360f
+private const val BREAKDOWN_ARC_OFFSET_ANGLE = 14f
 
 @Preview(uiMode = Configuration.UI_MODE_NIGHT_YES)
 @Composable
