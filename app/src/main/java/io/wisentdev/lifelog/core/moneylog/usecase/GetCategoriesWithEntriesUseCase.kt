@@ -6,14 +6,14 @@ import io.wisentdev.lifelog.data.repo.moneylog.MoneyLogRepository
 import io.wisentdev.lifelog.feature.moneylog.dashboard.model.MoneyLogCategoryDetails
 import javax.inject.Inject
 
-class GetMoneyLogOverviewUseCase @Inject constructor(
+class GetMoneyLogOverviewDetailsUseCase @Inject constructor(
     private val moneyLogRepository: MoneyLogRepository
 ) {
 
     suspend operator fun invoke(): MoneyLogOverview {
         val categories = moneyLogRepository.getCategoriesWithEntries()
-        val expenseCategoryEntities = categories.filter { it.category.isExpense }
-        val incomeCategoryEntities = categories.filter { !it.category.isExpense }
+        val expenseCategoryEntities = categories.filter { it.category.isExpense && it.entries.isNotEmpty()}
+        val incomeCategoryEntities = categories.filter { !it.category.isExpense && it.entries.isNotEmpty()}
 
         // TODO: Extract extension functions
         val totalIncome = incomeCategoryEntities.sumOf {
@@ -33,9 +33,9 @@ class GetMoneyLogOverviewUseCase @Inject constructor(
                 valuePercentage = currentCategoryValue / totalExpenses,
                 // TODO: Implement logic to determine icon from id but in the ViewModel layer when mapping to UI
                 iconRes = R.drawable.ic_euro,
-                iconTint = categoryWithEntries.category.iconTint,
+                iconTint = categoryWithEntries.category.categoryColor,
             )
-        }
+        }.sortedByDescending { it.value }
 
         val incomeCategories = incomeCategoryEntities.mapIndexed { index, categoryWithEntries: CategoryWithEntries ->
             val currentCategoryValue = incomeCategoryEntities[index].entries.sumOf { entry ->
@@ -45,12 +45,12 @@ class GetMoneyLogOverviewUseCase @Inject constructor(
                 id = categoryWithEntries.category.id,
                 name = categoryWithEntries.category.name,
                 value = currentCategoryValue,
-                valuePercentage = currentCategoryValue / totalExpenses,
+                valuePercentage = currentCategoryValue / totalIncome,
                 // TODO: Implement logic to determine icon from id but in the ViewModel layer when mapping to UI
                 iconRes = R.drawable.ic_euro,
-                iconTint = categoryWithEntries.category.iconTint,
+                iconTint = categoryWithEntries.category.categoryColor,
             )
-        }
+        }.sortedByDescending { it.value }
 
         return MoneyLogOverview(
             balance = totalIncome - totalExpenses,

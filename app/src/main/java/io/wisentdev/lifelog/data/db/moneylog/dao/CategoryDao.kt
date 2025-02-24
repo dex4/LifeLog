@@ -27,11 +27,20 @@ interface CategoryDao {
     suspend fun getCategoryWithEntries(): List<CategoryWithEntries>
 
     @Insert
-    suspend fun insert(vararg category: MoneyLogCategoryEntity)
+    suspend fun insert(category: MoneyLogCategoryEntity)
+
+    @Insert
+    suspend fun insertAll(categories: List<MoneyLogCategoryEntity>)
 
     @Update
-    suspend fun update(vararg category: MoneyLogCategoryEntity)
+    suspend fun update(category: MoneyLogCategoryEntity)
+
+    @Update
+    suspend fun updateAll(categories: List<MoneyLogCategoryEntity>)
 
     @Delete
-    suspend fun delete(vararg category: MoneyLogCategoryEntity)
+    suspend fun delete(category: MoneyLogCategoryEntity)
+
+    @Delete
+    suspend fun deleteAll(categories: List<MoneyLogCategoryEntity>)
 }

@@ -8,6 +8,7 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.aspectRatio
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.heightIn
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.material3.ButtonDefaults
@@ -42,9 +43,9 @@ fun TopCategoriesBreakdown(
     topCategoriesBreakdown: MoneyLogDashboardItem.TopCategoriesBreakdown,
     onViewCategoriesDetailsClicked: () -> Unit
 ) {
-    val count = remember(topCategoriesBreakdown) { min(topCategoriesBreakdown.categories.size, MAX_DISPLAYED_TOP_CATEGORIES) }
+    val categoriesCount = remember(topCategoriesBreakdown) { min(topCategoriesBreakdown.categories.size, MAX_DISPLAYED_TOP_CATEGORIES) }
     val stringRes = remember(topCategoriesBreakdown) {
-        //TODO: Use string res instead of raw string
+        //TODO: Use plurals res instead of raw string
         if (topCategoriesBreakdown.isExpensesBreakdown) "Top %s Expenses" else "Top %s Income Sources"
     }
     Column(
@@ -61,7 +62,7 @@ fun TopCategoriesBreakdown(
     ) {
         Text(
             modifier = Modifier.fillMaxWidth(),
-            text = String.format(stringRes, count),
+            text = String.format(stringRes, categoriesCount),
             color = LifeLogTheme.colorScheme.onBackground,
             style = LifeLogTheme.typography.headlineSmall,
             fontWeight = FontWeight.Bold,
@@ -71,14 +72,15 @@ fun TopCategoriesBreakdown(
         Row(
             modifier = Modifier
                 .fillMaxWidth()
-                .padding(top = LifeLogTheme.dimensions.small),
-            verticalAlignment = Alignment.Top
+                .heightIn(min = 160.dp)
+                .padding(top = LifeLogTheme.dimensions.medium),
+            verticalAlignment = Alignment.CenterVertically
         ) {
+            // TODO: Show different UI if there are no entries
             Canvas(
                 modifier = Modifier
                     .weight(1f)
                     .aspectRatio(1f)
-                    .align(Alignment.CenterVertically)
             ) {
                 var anglesSum = 0f
                 topCategoriesBreakdown.categories.fastForEach { moneyLogCategoryDetails ->
@@ -86,7 +88,9 @@ fun TopCategoriesBreakdown(
                     drawArc(
                         color = Color(moneyLogCategoryDetails.iconTint),
                         startAngle = -BREAKDOWN_ARC_START_ANGLE + anglesSum,
-                        sweepAngle = BREAKDOWN_ARC_FULL_SWEEP_ANGLE * moneyLogCategoryDetails.valuePercentage - BREAKDOWN_ARC_OFFSET_ANGLE,
+                        sweepAngle = BREAKDOWN_ARC_FULL_SWEEP_ANGLE *
+                                moneyLogCategoryDetails.valuePercentage -
+                                (if (categoriesCount > 1) BREAKDOWN_ARC_OFFSET_ANGLE else 0f),
                         size = Size(size.width, size.width),
                         useCenter = false,
                         style = Stroke(
@@ -100,7 +104,8 @@ fun TopCategoriesBreakdown(
             TopCategoriesList(
                 modifier = Modifier
                     .weight(2f)
-                    .padding(start = LifeLogTheme.dimensions.medium),
+                    .padding(start = LifeLogTheme.dimensions.large)
+                    .align(Alignment.Top),
                 categories = topCategoriesBreakdown.categories
             )
         }

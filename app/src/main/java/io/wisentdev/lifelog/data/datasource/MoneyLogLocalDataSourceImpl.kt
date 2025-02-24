@@ -1,4 +1,4 @@
-package io.wisentdev.lifelog.data.db.moneylog.datasource
+package io.wisentdev.lifelog.data.datasource
 
 import io.wisentdev.lifelog.data.db.moneylog.dao.CategoryDao
 import io.wisentdev.lifelog.data.db.moneylog.entities.CategoryWithEntries

@@ -4,7 +4,7 @@ import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
-import io.wisentdev.lifelog.data.db.moneylog.datasource.MoneyLogLocalDataSource
+import io.wisentdev.lifelog.data.datasource.MoneyLogLocalDataSource
 import io.wisentdev.lifelog.data.repo.moneylog.MoneyLogRepository
 import io.wisentdev.lifelog.data.repo.moneylog.MoneyLogRepositoryImpl
 import javax.inject.Singleton

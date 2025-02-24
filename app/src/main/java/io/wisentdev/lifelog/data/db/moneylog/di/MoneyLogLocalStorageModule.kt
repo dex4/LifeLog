@@ -9,8 +9,9 @@ import dagger.hilt.android.qualifiers.ApplicationContext
 import dagger.hilt.components.SingletonComponent
 import io.wisentdev.lifelog.data.db.moneylog.MoneyLogDatabase
 import io.wisentdev.lifelog.data.db.moneylog.dao.CategoryDao
-import io.wisentdev.lifelog.data.db.moneylog.datasource.MoneyLogLocalDataSource
-import io.wisentdev.lifelog.data.db.moneylog.datasource.MoneyLogLocalDataSourceImpl
+import io.wisentdev.lifelog.data.datasource.MoneyLogLocalDataSource
+import io.wisentdev.lifelog.data.datasource.MoneyLogLocalDataSourceImpl
+import io.wisentdev.lifelog.data.db.moneylog.dao.MoneyEntryDao
 import javax.inject.Singleton
 
 @Module
@@ -29,6 +30,8 @@ object MoneyLogLocalStorageModule {
     @Provides
     fun provideCategoryDao(database: MoneyLogDatabase): CategoryDao = database.categoryDao()
 
+    @Provides
+    fun provideMoneyEntryDao(database: MoneyLogDatabase): MoneyEntryDao = database.moneyEntryDao()
     @Provides
     @Singleton
     fun provideLocalDataSource(

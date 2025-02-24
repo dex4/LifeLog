@@ -14,15 +14,24 @@ interface MoneyEntryDao {
     @Query("SELECT * FROM $MONEY_ENTRY_TABLE_NAME")
     suspend fun getAll(): List<MoneyEntryEntity>
 
-    @Query("SELECT * FROM $MONEY_ENTRY_TABLE_NAME WHERE entryId = :entryId")
+    @Query("SELECT * FROM $MONEY_ENTRY_TABLE_NAME WHERE id = :entryId")
     suspend fun getById(entryId: String): MoneyEntryEntity
 
     @Insert
-    suspend fun insert(vararg moneyEntryEntity: MoneyEntryEntity)
+    suspend fun insert(moneyEntryEntity: MoneyEntryEntity)
+
+    @Insert
+    suspend fun insertAll(moneyEntryEntities: List<MoneyEntryEntity>)
 
     @Update
-    suspend fun update(vararg moneyEntryEntity: MoneyEntryEntity)
+    suspend fun update(moneyEntryEntity: MoneyEntryEntity)
+
+    @Update
+    suspend fun updateAll(moneyEntryEntities: List<MoneyEntryEntity>)
 
     @Delete
-    suspend fun delete(vararg moneyEntryEntity: MoneyEntryEntity)
+    suspend fun delete(moneyEntryEntity: MoneyEntryEntity)
+
+    @Delete
+    suspend fun deleteAll(moneyEntryEntities: List<MoneyEntryEntity>)
 }

@@ -6,8 +6,8 @@ import androidx.room.Relation
 data class CategoryWithEntries(
     @Embedded val category: MoneyLogCategoryEntity,
     @Relation(
-        parentColumn = KEY_CATEGORY_ID,
-        entityColumn = KEY_MONEY_ENTRY_ENTITY_ID
+        parentColumn = MONEY_LOG_CATEGORY_ID,
+        entityColumn = MONEY_LOG_CATEGORY_ID
     )
     val entries: List<MoneyEntryEntity>,
 )
